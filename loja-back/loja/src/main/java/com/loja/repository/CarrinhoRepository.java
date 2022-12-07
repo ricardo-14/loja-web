@@ -1,2 +1,7 @@
-package com.loja.repository;public interface CarrinhoRepository {
+package com.loja.repository;
+
+import com.loja.model.Carrinho;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CarrinhoRepository extends JpaRepository<Carrinho, Long> {
 }

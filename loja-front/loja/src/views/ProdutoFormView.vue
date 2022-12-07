@@ -17,7 +17,7 @@
                 </div>
                 <div class="form-control-dropdown">
                     <label for="">Marca </label>
-                    <Dropdown v-model="produto.marca" :options="marcas" optionLabel="nome" placeholder="Selecione uma marca" />
+                    <Dropdown v-model="produto.marcas" :options="marcas" optionLabel="nome" placeholder="Selecione uma marca" />
                 </div>
                 
                 <Button type="submit" label="Salvar"/>

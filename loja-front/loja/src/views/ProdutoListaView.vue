@@ -15,12 +15,10 @@
 						</div>
 					</template>
 					<template #list="slotProps">
-						<div class="col-12">
+						<div class="col-12" >
 							<div class="flex flex-column md:flex-row align-items-center p-3 w-full">
-								<img :src="'images/product/cerveja.jpg'" :alt="Cerveja" class="my-4 md:my-0 w-9 md:w-10rem shadow-2 mr-5" />
 								<div class="flex-1 text-center md:text-left">
 									<div class="font-bold text-2xl">{{slotProps.data.nome}}</div><br>
-									<!--<div class="mb-3">{{slotProps.data.description}}</div>-->
 									<Rating :modelValue="slotProps.data.rating" :readonly="true" :cancel="false" class="mb-2"></Rating>
 									<div class="flex align-items-center">
 										<i class="pi pi-tag mr-2"></i>
@@ -30,7 +28,7 @@
 								</div>
 								<div class="flex flex-row md:flex-column justify-content-between w-full md:w-auto align-items-center md:align-items-end mt-5 md:mt-0">
 									<span class="text-2xl font-semibold mb-2 align-self-center md:align-self-end">R$: {{slotProps.data.valor}}</span>
-									<Button icon="pi pi-shopping-cart" label="Add to Cart" class="mb-2"></Button>
+									<Button icon="pi pi-shopping-cart" label="Add to Cart" class="mb-2" @click="salvarCarrinho()"></Button>
 									<!--<span :class="'product-badge status-'+slotProps.data.inventoryStatus.toLowerCase()">{{slotProps.data.inventoryStatus}}</span>-->
 								</div>
 							</div>
@@ -47,7 +45,7 @@
 									</div>
 								</div>
 								<div class="text-center">
-									<img :src="'images/product/cerveja.jpg'" :alt="cerveja" class="w-9 shadow-2 my-3 mx-0"/>
+									<!--<img :src="'images/product/cerveja.jpg'" :alt="cerveja" class="w-9 shadow-2 my-3 mx-0"/>-->
 									<div class="text-2xl font-bold">{{slotProps.data.nome}}</div>
 					
 									<Rating :modelValue="slotProps.data.rating" :readonly="true" :cancel="false"></Rating>
@@ -71,6 +69,7 @@
 	export default {
 		data() {
 			return {
+				carrinho: {},
 				produtos: [],
 				layout: 'list',
 				sortKey: null,
@@ -105,9 +104,14 @@
             axios
             .get('http://localhost:8080/produto')
             .then(resp => {
-                this.produtos = resp.data
+                this.produtos = resp.data;
             })
-        }
+        },
+		salvarCarrinho() {
+                axios.post('http://localhost:8080/carrinho', this.carrinho)
+                .then(() => this.$toast.add({severity:'success', summary: 'Registro gravado!'}))
+                .catch(error => this.$toast.add({severity:'error', summary: `Problema na gravação ${error}`}))
+            }
 		}
 	}
 </script>

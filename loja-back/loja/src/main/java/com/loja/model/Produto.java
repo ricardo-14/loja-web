@@ -3,10 +3,11 @@ package com.loja.model;
 import com.sun.istack.NotNull;
 import lombok.Data;
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data
-public class Produto {
+public class Produto implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
