@@ -51,7 +51,12 @@ const routes = [
                   path: '/produto-form',
                   name: 'produto-form-new',
                   component: () => import('./views/ProdutoFormView.vue')
-                }
+                },
+                {
+                  path: '/carrinho',
+                  name: 'carrinho',
+                  component: () => import('./views/CarrinhoView.vue')
+              },
         ]
     }
 ];

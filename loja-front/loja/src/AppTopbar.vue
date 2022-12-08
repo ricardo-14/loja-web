@@ -2,7 +2,7 @@
 	<div class="layout-topbar">
 		<router-link to="/" class="layout-topbar-logo">
 			<img alt="Logo" :src="topbarImage()" />
-			<span>SAKAI</span>
+			<span>Bebidas LTDA</span>
 		</router-link>
 		<button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle">
 			<i class="pi pi-bars"></i>
@@ -15,15 +15,9 @@
 		</button>
 		<ul class="layout-topbar-menu hidden lg:flex origin-top">
 			<li>
-				<button class="p-link layout-topbar-button">
-					<i class="pi pi-calendar"></i>
-					<span>Events</span>
-				</button>
-			</li>
-			<li>
-				<button class="p-link layout-topbar-button">
-					<i class="pi pi-cog"></i>
-					<span>Settings</span>
+				<button class="p-link layout-topbar-button" @click="abrirCarrinho()">
+					<i class="pi pi-shopping-cart"></i>
+					<span>Carrinho</span>
 				</button>
 			</li>
 			<li>
@@ -47,7 +41,10 @@ export default {
         },
 		topbarImage() {
 			return this.$appState.darkTheme ? 'images/logo-white.svg' : 'images/logo-dark.svg';
-		}
+		},
+		abrirCarrinho() {
+            this.$router.push(`/carrinho`)
+        },
     },
 	computed: {
 		darkTheme() {
