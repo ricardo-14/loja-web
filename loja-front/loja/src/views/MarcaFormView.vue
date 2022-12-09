@@ -3,12 +3,12 @@
 <div class="corpo">
     <div class="container">
         <div class="header">
-            <h2>Cadastro de Marcas</h2>
+            <h2>Nova Marca</h2>
         </div>
 
         <form id="form" class="form" @submit.prevent="salvar()">
             <div class="form-control">
-                <label for="nome">Nome da marca </label>
+                <label for="nome">Nome da Marca: </label>
                 <InputText type="text" v-model="marca.nome"/>
             </div>
 
@@ -43,8 +43,16 @@ export default {
     methods: {
         salvar() {
             axios.post('http://localhost:8080/marca', this.marca)
-            .then(() => this.$toast.add({severity:'success', summary: 'Successful', detail: 'Registro gravado!', life: 3000}))
+            .then(() => this.$toast.add({severity:'success', summary: 'Successo!', detail: 'Registro gravado.', life: 4000}))
             .catch(error => this.$toast.add({severity:'error', summary: `Problema na gravação ${error}`}))
+            this.limpaForm()
+        },
+        limpaForm() {
+
+            this.marca = {
+                nome: ''
+            }
+
         },
         voltar() {
             this.$router.go(-1)

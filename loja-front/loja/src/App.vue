@@ -37,20 +37,14 @@ export default {
                 {
                     label: 'Home',
                     items: [{
-                        label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/'
+                        label: 'Bebidas', icon: 'pi pi-fw pi-bookmark', to: '/produto-lista'
                     }]
                 },
                 {
                     label: 'Cadastros',
                     items: [
-                        {label: 'Marca', icon: 'pi pi-fw pi-bookmark', to: '/marca'},
-                        {label: 'Produto', icon: 'pi pi-fw pi-bookmark', to: '/produto'}
-                    ]
-                },
-                {
-                    label: 'Listas',
-                    items: [
-                        {label: 'Listas de Produtos', icon: 'pi pi-fw pi-bookmark', to: '/produto-lista'},
+                        {label: 'Marca', icon: 'pi pi-fw pi-database', to: '/marca'},
+                        {label: 'Produto', icon: 'pi pi-fw pi-database', to: '/produto'}
                     ]
                 },
 

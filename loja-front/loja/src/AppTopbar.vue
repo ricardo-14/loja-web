@@ -1,7 +1,6 @@
 <template>
 	<div class="layout-topbar">
 		<router-link to="/" class="layout-topbar-logo">
-			<img alt="Logo" :src="topbarImage()" />
 			<span>Bebidas LTDA</span>
 		</router-link>
 		<button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle">
@@ -40,7 +39,7 @@ export default {
             this.$emit('topbar-menu-toggle', event);
         },
 		topbarImage() {
-			return this.$appState.darkTheme ? 'images/logo-white.svg' : 'images/logo-dark.svg';
+			return this.$appState.darkTheme ? 'images/' : 'images/';
 		},
 		abrirCarrinho() {
             this.$router.push(`/carrinho`)

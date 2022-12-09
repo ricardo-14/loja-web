@@ -6,17 +6,17 @@
 				<Toolbar class="mb-4">
 					<template v-slot:start>
 						<div class="my-2">
-							<Button label="New" icon="pi pi-plus" class="p-button-success mr-2" @click="novo()" />
+							<Button label="Nova marca" icon="pi pi-plus" class="p-button-success mr-2" @click="novo()" />
 						</div>
 					</template>
 				</Toolbar>
 
 				<DataTable ref="dt" :value="marcas" v-model:selection="selectedMarcas" dataKey="id" :paginator="true" :rows="10" :filters="filters"
-							paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown" :rowsPerPageOptions="[5,10,25]"
-							currentPageReportTemplate="Showing {first} to {last} of {totalRecords} marcas" responsiveLayout="scroll">
+							paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink"
+							currentPageReportTemplate="" responsiveLayout="scroll">
 					<template #header>
 						<div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-							<h5 class="m-0">Lista de marcas</h5>
+							<h5 class="m-0">Marcas cadastradas</h5>
 							<span class="block mt-2 md:mt-0 p-input-icon-left">
                                 <i class="pi pi-search" />
                                 <InputText v-model="filters['global'].value" placeholder="Search..." />
@@ -29,10 +29,21 @@
 					<Column headerStyle="min-width:10rem;">
 						<template #body="{data}">
 							<Button icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2" @click="editar(data)" />
-							<Button icon="pi pi-trash" class="p-button-rounded p-button-danger mt-2" @click="excluir(data)" />
+							<Button icon="pi pi-trash" class="p-button-rounded p-button-danger mt-2" @click="confirmDeleteMarca(data)" />
 						</template>
 					</Column>
 				</DataTable>
+
+				<Dialog v-model:visible="deleteMarcaDialog" :style="{width: '450px'}" header="Confirmação" :modal="true">
+					<div class="flex align-items-center justify-content-center">
+						<i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem" />
+						<span v-if="marcas">Deseja realmente excluir a marca <b>{{marca.nome}}</b>?</span>
+					</div>
+					<template #footer>
+						<Button label="Não" icon="pi pi-times" class="p-button-text" @click="deleteMarcaDialog = false"/>
+						<Button label="Sim" icon="pi pi-check" class="p-button-text" @click="excluir(marca)" />
+					</template>
+				</Dialog>
 			</div>
 		</div>
 	</div>
@@ -48,6 +59,7 @@ export default {
 		return {
             marcas: [],
 			filters: {},
+			deleteMarcaDialog: false,
 		}
 	},
 	created() {
@@ -69,15 +81,18 @@ export default {
             this.$router.push('/marca-form/')
         },
         excluir(marca) {
-			this.deleteProductDialog = false;
             const id = marca.id
             axios
                 .delete(`http://localhost:8080/marca/${id}`)
                 .then(this.load(),
 				location.reload())
                 .catch(error => alert(error))
-                
+                this.deleteMarcaDialog = false;
         },
+		confirmDeleteMarca(marca) {
+			this.marca = marca;
+			this.deleteMarcaDialog = true;
+		},
 		initFilters() {
             this.filters = {
                 'global': {value: null, matchMode: FilterMatchMode.CONTAINS},

@@ -17,6 +17,15 @@ public class Produto implements Serializable {
     @Column(length = 50)
     private String nome;
 
+    @Column(length = 500)
+    private String descricao;
+
+    @Column(length = 50)
+    private String imagem;
+
+    @Column
+    private Integer classificacao;
+
     @NotNull
     @Column
     private Double valor;

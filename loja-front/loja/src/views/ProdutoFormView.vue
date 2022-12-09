@@ -3,21 +3,29 @@
     <div class="corpo">
         <div class="container">
             <div class="header">
-                <h2>Cadastro de Produtos</h2>
+                <h2>Novo Produto</h2>
             </div>
     
             <form id="form" class="form-carro" @submit.prevent="salvar()">
                 <div class="form-control">
-                    <label for="nome">Nome </label>
+                    <label for="nome">Nome do Produto: </label>
                     <InputText type="text" v-model="produto.nome"/>
                 </div>
                 <div class="form-control">
-                    <label for="">Valor </label>
-                    <InputText type="number" v-model="produto.valor"/>
+                    <label for="">Descrição: </label>
+                    <InputText type="text" v-model="produto.descricao"/>
+                </div>
+                <div class="form-control">
+                    <label for="">Valor do Produto: </label>
+                    <InputText type="number" step=".01" v-model="produto.valor"/>
+                </div>
+                <div class="form-control">
+                    <label for="">Classificação: </label>
+                    <InputText type="number" v-model="produto.classificacao"/>
                 </div>
                 <div class="form-control-dropdown">
-                    <label for="">Marca </label>
-                    <Dropdown v-model="produto.marcas" :options="marcas" optionLabel="nome" placeholder="Selecione uma marca" />
+                    <label for="">Marca do Produto:</label>
+                    <Dropdown v-model="produto.marca" :options="marcas" optionLabel="nome" placeholder="Selecione a marca" />
                 </div>
                 
                 <Button type="submit" label="Salvar"/>
@@ -33,7 +41,7 @@
           data() {
               return {
                 produto: {},
-                  marcas: [],
+                marcas: [], 
               }
           },
           mounted() {
@@ -57,12 +65,19 @@
         methods: {
             salvar() {
                 axios.post('http://localhost:8080/produto', this.produto)
-                .then(() => this.$toast.add({severity:'success', summary: 'Registro gravado!'}))
+                .then(() => this.$toast.add({severity:'success', summary: 'Successo!', detail: 'Registro gravado.', life: 4000}))
                 .catch(error => this.$toast.add({severity:'error', summary: `Problema na gravação ${error}`}))
+                this.limpaForm()
             },
             voltar() {
                 this.$router.go(-1)
-            }
+            },
+            limpaForm() {
+              this.produto = {
+                nome: '',
+                valor: ''
+              }
+            },
         }
     }
     

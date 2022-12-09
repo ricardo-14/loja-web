@@ -2,13 +2,10 @@
 	<div class="grid">
 		<div class="col-12">
 			<div class="card">
-				<h5>DataView</h5>
+				<h5>Bebidas em Estoque</h5>
 				<DataView :value="produtos" :layout="layout" :paginator="true" :rows="9" :sortOrder="sortOrder" :sortField="sortField">
 					<template #header>
 						<div class="grid grid-nogutter">
-							<div class="col-6 text-left">
-								<Dropdown v-model="sortKey" :options="sortOptions" optionLabel="label" placeholder="Sort By Price" @change="onSortChange($event)"/>
-							</div>
 							<div class="col-6 text-right">
 								<DataViewLayoutOptions v-model="layout" />
 							</div>
@@ -17,9 +14,11 @@
 					<template #list="slotProps">
 						<div class="col-12" >
 							<div class="flex flex-column md:flex-row align-items-center p-3 w-full">
+								<img :src="('images/bebidas/' + slotProps.data.imagem)" :alt="slotProps.data.nome" class="my-4 md:my-0 w-9 md:w-10rem shadow-2 mr-5"/>
 								<div class="flex-1 text-center md:text-left">
-									<div class="font-bold text-2xl">{{slotProps.data.nome}}</div><br>
-									<Rating :modelValue="slotProps.data.rating" :readonly="true" :cancel="false" class="mb-2"></Rating>
+									<div class="font-bold text-2xl">{{slotProps.data.nome}}</div>
+									<div class="mb-3">{{slotProps.data.descricao}}</div>
+									<Rating :modelValue="slotProps.data.classificacao" :readonly="true" :cancel="false" class="mb-2"></Rating>
 									<div class="flex align-items-center">
 										<i class="pi pi-tag mr-2"></i>
 										<span class="font-semibold">Marca: {{slotProps.data.marca.nome}}</span>
@@ -45,10 +44,10 @@
 									</div>
 								</div>
 								<div class="text-center">
-									<!--<img :src="'images/product/cerveja.jpg'" :alt="cerveja" class="w-9 shadow-2 my-3 mx-0"/>-->
+									<img :src="('images/bebidas/' + slotProps.data.imagem)" :alt="slotProps.data.nome" class="w-9 shadow-2 my-3 mx-0"/>
 									<div class="text-2xl font-bold">{{slotProps.data.nome}}</div>
-					
-									<Rating :modelValue="slotProps.data.rating" :readonly="true" :cancel="false"></Rating>
+									<div class="mb-3">{{slotProps.data.descricao}}</div>
+									<Rating :modelValue="slotProps.data.classificacao" :readonly="true" :cancel="false"></Rating>
 								</div>
 								<div class="flex align-items-center justify-content-between">
 									<span class="text-2xl font-semibold">${{slotProps.data.valor}}</span>
