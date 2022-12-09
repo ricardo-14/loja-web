@@ -24,17 +24,17 @@
                                 </div>
                             </template>
   
-                      <Column field="id" header="Id" :sortable="true" headerStyle="width:1%; min-width:10rem;"></Column>
-                      <Column header="Imagem" headerStyle="width:1%; min-width:10rem;">
+                      <Column field="id" header="Id" :sortable="true" headerStyle="width:14%; min-width:10rem;"></Column>
+                      <Column header="Imagem" headerStyle="width:14%; min-width:10rem;">
                         <template #body="slotProps">
                             <img :src="('images/bebidas/' + slotProps.data.imagem)" :alt="slotProps.data.nome" class="shadow-2" width="100" />
                         </template>
                       </Column>
-                      <Column field="nome" header="Nome" :sortable="true" headerStyle="width:1%; min-width:10rem;"></Column>
-                      <Column field="descricao" header="Descrição" :sortable="true" headerStyle="width:1%; min-width:10rem;"></Column>
-                      <Column field="valor" header="Valor" :sortable="true" headerStyle="width:1%; min-width:10rem;"></Column>
-                      <Column field="classificacao" header="Classificação" :sortable="true" headerStyle="width:1%; min-width:10rem;"></Column>
-                      <Column field="marca.nome" header="Marca" :sortable="true" headerStyle="width:1%; min-width:10rem;"></Column>
+                      <Column field="nome" header="Nome" :sortable="true" headerStyle="width:14%; min-width:10rem;"></Column>
+                      <Column field="descricao" header="Descrição" :sortable="true" headerStyle="width:14%; min-width:10rem;"></Column>
+                      <Column field="valor" header="Valor" :sortable="true" headerStyle="width:14%; min-width:10rem;"></Column>
+                      <Column field="classificacao" header="Classificação" :sortable="true" headerStyle="width:14%; min-width:10rem;"></Column>
+                      <Column field="marca.nome" header="Marca" :sortable="true" headerStyle="width:14%; min-width:10rem;"></Column>
                       <Column headerStyle="min-width:10rem;">
                           <template #body="{data}">
                               <Button icon="pi pi-image" class="p-button-rounded p-button-primary mr-2" @click="salvarImagem(data)" />
